@@ -1,0 +1,43 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: .circleci/module5 # Specify your Docker image
+
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: |
+            # Add your build commands here
+
+  deploy:
+    docker:
+      - image: .circleci/module5 # Specify your Docker image
+
+    steps:
+      - checkout
+      - run:
+          name: Deploy
+          command: |
+            # Add your deployment commands here
+            mkdir DEPLOY-$(date +"%Y%m%d")
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
+
