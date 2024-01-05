@@ -3,25 +3,27 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/module5 # Specify your Docker image
-
+      - image: circleci/test.js # Specify your Docker image
+    working_directory: /module5
     steps:
       - checkout
       - run:
           name: Build
-          command: .config.yml|
+          command: |
             # Add your build commands here
+            echo "Building RS Software"
 
   deploy:
     docker:
-      - image: circleci/module5 # Specify your Docker image
-
+      - image: circleci/test.js # Specify your Docker image
+    working_directory: /module5
     steps:
       - checkout
       - run:
           name: Deploy
-          command: ./config.yml|
+          command: |
             # Add your deployment commands here
+            echo "Deploying RS Software"
             mkdir DEPLOY-$(date +"%Y%m%d")
 
 workflows:
