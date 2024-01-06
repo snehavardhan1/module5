@@ -35,15 +35,15 @@ jobs:
 
   deploy:
     docker:
-      - image: python:3.8
-    working_directory: /module5/circleci  # Update this path to match your project structure
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/circleci-demo  # Update this path to match your project structure
     steps:
       - checkout
       - run:
           name: Deploy
           command: |
-            mkdir -p DEPLOY-$(date +"%Y%m%d")
-            cp -r * DEPLOY-$(date +"%Y%m%d")/
+            mkdir -p ~/circleci-demo-extension/DEPLOY-$(date +"%Y%m%d")
+            cp -r *  ~/circleci-demo-extension/DEPLOY-$(date +"%Y%m%d")/
 
 workflows:
   version: 2
