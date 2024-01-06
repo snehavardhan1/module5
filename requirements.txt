@@ -1,5 +1,4 @@
-version: 2.1
-
+package_name==2.1
 jobs:
   build:
     docker:
