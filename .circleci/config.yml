@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
-    working_directory: ~/.ssh/module5/.circleci  # Update this path to match your project structure
+    working_directory: C:\Users\12167\.ssh\module5\.circleci  # Update this path to match your project structure
     steps:
       - checkout 
       - run: mvn clean install    
