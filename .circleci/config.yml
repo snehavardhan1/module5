@@ -27,13 +27,13 @@ jobs:
   test:
     docker:
       - image: python:3.8
-    working_directory: /module5/circleci  # Update this path to match your project structure
+    working_directory: /module5/circleci/calculator  # Update this path to match your project structure
     steps:
       - checkout
       - run:
           name: Run unit tests
           command: |
-            python -m unittest discover tests
+            mvn clean install 
 
   deploy:
     docker:
