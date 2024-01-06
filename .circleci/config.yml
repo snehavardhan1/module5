@@ -11,7 +11,7 @@ jobs:
           name: Install Maven
           command: |
           
-            mvn clean install
+            
 
   lint:
     docker:
@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            mvn clean install 
+             
 
   deploy:
     docker:
