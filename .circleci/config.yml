@@ -14,21 +14,25 @@ jobs:
           name: Build
           command: |
             # Add your build commands here
-               echo "Building RS Software"
+            echo "Building RS Software"
+
   lint:
     docker:
-      -image: node:latest
-      steps:
-        - checkout
-        - run:
-           name: Lint
-           command: |
-
+      - image: node:latest
+    working_directory: /module5/circleci  # Update this path to match your project structure
+    steps:
+      - checkout
+      - run:
+          name: Lint
+          command: |
+            # Add your linting commands here
+            echo "Linting RS Software"
+            npm install -g eslint
+            eslint .  # Replace this with your linting command, e.g., eslint . or flake8 .
 
   deploy:
     docker:
       - image: node:latest
-      
     working_directory: /module5/circleci  # Update this path to match your project structure
     steps:
       - checkout
@@ -39,7 +43,6 @@ jobs:
             echo "Deploying RS Software"
             mkdir -p DEPLOY-$(date +"%Y%m%d")
 
-            
 workflows:
   version: 2
   build-and-deploy:
@@ -49,9 +52,16 @@ workflows:
             branches:
               only:
                 - main
-      - deploy:
+      - lint:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          requires:
+            - lint
           filters:
             branches:
               only:
