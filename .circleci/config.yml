@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
-    working_directory: ~/.add  # Update this path to match your project structure
+    working_directory: ~/.circleci  # Update this path to match your project structure
     steps:
       - checkout
       - run: mvn clean
