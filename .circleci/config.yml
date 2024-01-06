@@ -8,8 +8,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: Install Maven
           command: |
+            sudo apt-get update
+            sudp apt-get install -y maven
+          echo 'export PATH=$PATH:/C:/Program Files/apache-maven-3.9.6/bin' >> $BASH_ENV
+          source $BASH_ENV
             mvn clean install
 
   lint:
