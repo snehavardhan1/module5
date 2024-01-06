@@ -6,10 +6,8 @@ jobs:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/.ssh/module5/.circleci  # Update this path to match your project structure
     steps:
-      - checkout
-      - run: mvn clean
-      - run: mvn test 
-      - run: mvn install    
+      - checkout 
+      - run: mvn clean install    
 
 
   lint:
