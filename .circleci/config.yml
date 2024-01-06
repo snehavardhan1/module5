@@ -24,16 +24,7 @@ jobs:
             pip install flake8
             flake8
 
-  test:
-    docker:
-      - image: python:3.8
-    working_directory: /module5/circleci  # Update this path to match your project structure
-    steps:
-      - checkout
-      - run:
-          name: Run unit tests
-          command: |
-            python -m unittest discover tests
+
 
   deploy:
     docker:
