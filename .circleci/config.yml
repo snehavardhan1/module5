@@ -5,8 +5,7 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: node:latest
+
     working_directory: /module5/circleci  # Update this path to match your project structure
     steps:
       - checkout
@@ -17,8 +16,7 @@ jobs:
             echo "Building RS Software"
 
   deploy:
-    docker:
-      - image: node:latest
+      
     working_directory: /module5/circleci  # Update this path to match your project structure
     steps:
       - checkout
