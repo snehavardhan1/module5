@@ -1,18 +1,17 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.7
-
 jobs:
   build:
-    docker:
-      - image: node:latest
-    working_directory: /module5/circleci  # Update this path to match your project structure
-    steps:
-      - checkout
-      - run:
-          name: Build
-          command: |
+
+    orbs:
+      node: circleci/node@4.7
+    
+      working_directory: /module5/circleci  # Update this path to match your project structure
+      steps:
+         - checkout
+         - run:
+           name: Build
+           command: |
             # Add your build commands here
             echo "Building RS Software"
 
