@@ -19,7 +19,7 @@ jobs:
   deploy:
     docker:
       - image: node:latest
-    working_directory: /module5/circleci  # Update this path to match your project structure
+    working_directory:   # Update this path to match your project structure
     steps:
       - checkout
       - run:
