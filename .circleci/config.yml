@@ -1,47 +1,51 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.7
-
 jobs:
   build:
     docker:
-      - image: node:latest
+      - image: python:3.8
     working_directory: /module5/circleci  # Update this path to match your project structure
     steps:
       - checkout
       - run:
-          name: Build
+          name: Install dependencies
           command: |
-            # Add your build commands here
-            echo "Building RS Software"
+            pip install -r requirements.txt
 
   lint:
     docker:
-      - image: node:latest
+      - image: python:3.8
     working_directory: /module5/circleci  # Update this path to match your project structure
     steps:
       - checkout
       - run:
           name: Lint
           command: |
-            # Add your linting commands here
-            echo "Linting RS Software"
-            npm install -g eslint
-            eslint .  # Replace this with your linting command, e.g., eslint . or flake8 .
+            pip install flake8
+            flake8
+
+  test:
+    docker:
+      - image: python:3.8
+    working_directory: /module5/circleci  # Update this path to match your project structure
+    steps:
+      - checkout
+      - run:
+          name: Run unit tests
+          command: |
+            python -m unittest discover tests
 
   deploy:
     docker:
-      - image: node:latest
+      - image: python:3.8
     working_directory: /module5/circleci  # Update this path to match your project structure
     steps:
       - checkout
       - run:
           name: Deploy
           command: |
-            # Add your deployment commands here
-            echo "Deploying RS Software"
             mkdir -p DEPLOY-$(date +"%Y%m%d")
+            cp -r * DEPLOY-$(date +"%Y%m%d")/
 
 workflows:
   version: 2
@@ -59,9 +63,16 @@ workflows:
             branches:
               only:
                 - main
-      - deploy:
+      - test:
           requires:
             - lint
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
               only:
