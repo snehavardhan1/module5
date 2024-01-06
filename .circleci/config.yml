@@ -4,13 +4,13 @@ jobs:
   build:
     docker:
       - image: python:3.8
-    working_directory: /module5/circleci  # Update this path to match your project structure
+    working_directory: /module5/circleci/calculator  # Update this path to match your project structure
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
-            pip install -r requirements.txt
+            mvn clean install
 
   lint:
     docker:
